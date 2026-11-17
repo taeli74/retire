@@ -1531,16 +1531,18 @@ $('#back').addEventListener('click',function(){backNav=true},true);
 /* ===== 자산 ===== */
 var LD={
  re:{t:'부동산 전체',g:'부',d:'집·토지 등 통으로 입력',r:30},rh:{t:'거주 주택',g:'집',d:'내가 사는 집',r:30},ri:{t:'투자용 주택·상가',g:'상',d:'월세·임대용',r:30},rl:{t:'토지',g:'토',d:'땅·임야',r:20},ro:{t:'기타 부동산',g:'기',d:'분양권·오피스텔 등',r:20},
- us:{t:'미국 주식',g:'美',d:'미국 개별 종목',r:70},kr:{t:'한국 주식',g:'韓',d:'국내 개별 종목',r:50},dv:{t:'배당주',g:'배',d:'배당 중심 종목(국내외)',r:45},gr:{t:'성장주',g:'성',d:'성장 중심 종목(국내외)',r:80},ix:{t:'지수·ETF·펀드',g:'지',d:'S&P500·코스피 등',r:60},
- irp:{t:'IRP',g:'I',d:'개인형 퇴직연금',r:50},pf:{t:'연금저축펀드',g:'연',d:'연금저축 계좌',r:60},po:{t:'기타 연금',g:'기',d:'연금저축보험·퇴직연금 등',r:30},
+ usd:{t:'배당주',g:'배',d:'미국 배당 중심 종목·배당 ETF',r:50},usg:{t:'성장주',g:'성',d:'미국 성장 중심 종목',r:80},usi:{t:'지수 ETF',g:'지',d:'S&P500·나스닥100 등',r:70},krd:{t:'배당주',g:'배',d:'국내 배당 중심 종목·배당 ETF',r:40},krg:{t:'성장주',g:'성',d:'국내 성장 중심 종목',r:60},kri:{t:'지수 ETF',g:'지',d:'코스피200·코스닥150 등',r:50},
+ dc:{t:'DC형 퇴직연금',g:'DC',d:'회사가 넣어 주고 내가 운용하는 계좌',r:40},irp:{t:'IRP1',g:'I1',d:'개인형 퇴직연금 계좌',r:50},irp2:{t:'IRP2',g:'I2',d:'다른 금융사의 IRP 계좌',r:50},pf:{t:'연금저축펀드1',g:'연1',d:'연금저축 계좌',r:60},pf2:{t:'연금저축펀드2',g:'연2',d:'다른 금융사의 연금저축 계좌',r:60},isa:{t:'ISA',g:'ISA',d:'만기 때 연금계좌로 옮길 수 있어요',r:50},po:{t:'기타 연금',g:'기',d:'연금저축보험 등',r:30},
  cash:{t:'예금·현금',g:'예',d:'예금·적금·CMA·파킹통장',r:25},bond:{t:'채권',g:'채',d:'국채·회사채·채권형',r:35},oth:{t:'그 밖의 자산',g:'기',d:'금·가상자산·회원권 등',r:20}
 };
-var GRP={re:['re'],reD:['rh','ri','rl','ro'],st:['us','kr','dv','gr','ix'],pn:['irp','pf','po'],ca:['cash','bond','oth']};
+var GRP={re:['re'],reD:['rh','ri','rl','ro'],st:['usd','usg','usi','krd','krg','kri'],stU:['usd','usg','usi'],stK:['krd','krg','kri'],stD:['usd','krd'],pn:['dc','irp','irp2','pf','pf2','isa','po'],ca:['cash','bond','oth']};
 var GDEF={pn:50,st:60,ca:25};
 function ad(){
   if(!S.ad){var a=S.asset||{},d={};
-    if(a.cash)d.cash={a:a.cash};if(a.bond)d.bond={a:a.bond};if(a.oth)d.oth={a:a.oth};if(a.re)d.re={a:a.re};if(a.stock)d.ix={a:a.stock};if(a.pen)d.po={a:a.pen};
+    if(a.cash)d.cash={a:a.cash};if(a.bond)d.bond={a:a.bond};if(a.oth)d.oth={a:a.oth};if(a.re)d.re={a:a.re};if(a.stock)d.usi={a:a.stock};if(a.pen)d.po={a:a.pen};
     S.ad=d}
+  var o=S.ad,mv={us:'usg',kr:'krg',dv:'krd',gr:'usg',ix:'usi'};
+  Object.keys(mv).forEach(function(k){if(o[k]){var t=mv[k];if(o[t])o[t].a=(o[t].a||0)+(o[k].a||0);else o[t]=o[k];delete o[k]}});
   return S.ad;
 }
 function leafA(k){var x=ad()[k];return x&&x.a||0}
@@ -1629,7 +1631,7 @@ function pensionAt(s,N){
 }
 function divAt(X){
   var age=curAge(),y=Math.max(0,X-age),R=simRun(Math.max(X,age+1)),row=R.rows[Math.min(y,R.rows.length-1)],inf=Math.pow(1+S.infl/1000,y),p=pcs();
-  var dvg=leafA('dv')*Math.pow(1+leafR('dv')/1000,y),oth=Math.max(0,row.st-dvg),gross=(dvg*p.dy/1000+oth*p.dy2/1000)/12/inf;
+  var dvg=GRP.stD.reduce(function(t,k){return t+leafA(k)*Math.pow(1+leafR(k)/1000,y)},0),oth=Math.max(0,row.st-dvg),gross=(dvg*p.dy/1000+oth*p.dy2/1000)/12/inf;
   return {bal:row.st/inf,gross:gross,net:gross*(1-0.154)};
 }
 function othAt(a){var s=0;Object.keys(S.inc||{}).forEach(function(k){if(k==='np')return;var x=S.inc[k];if(a>=x.s&&a<endOf(x))s+=x.amt});return s}
@@ -1827,8 +1829,8 @@ SCR.asset=function(el){
   if(tot){var r=simRun();L=r.rows[r.rows.length-1]}
   el.innerHTML=ptitle('내 자산')+aHero()+(tot?AN:'')+
    cg([card('a_re','부동산',reSum()?mf(reSum()):'입력 전',reMode()==='detail'?'세부로 입력':'통으로 입력'),
-       card('a_st','주식·펀드',sumK(GRP.st)?mf(sumK(GRP.st)):'입력 전','미국·한국·배당·성장·지수'),
-       card('a_pn','연금계좌',sumK(GRP.pn)?mf(sumK(GRP.pn)):'입력 전','IRP·연금저축·기타'),
+       card('a_st','주식·펀드',sumK(GRP.st)?mf(sumK(GRP.st)):'입력 전','미국·한국 · 배당·성장·지수'),
+       card('a_pn','연금계좌',sumK(GRP.pn)?mf(sumK(GRP.pn)):'입력 전','DC·IRP·연금저축·ISA'),
        card('a_ca','예금·채권·기타',sumK(GRP.ca)?mf(sumK(GRP.ca)):'입력 전',debt?'부채 '+mf(debt):'부채도 입력할 수 있어요'),
        card('a_sim','자산 시뮬레이션',L?T+'세 '+mf(L.tot):'입력 후 계산',L?'오늘 돈으로 '+mf(L.real):'원하는 나이의 자산'),
        card('a_inc','자산이 만드는 월 소득',fin?'월 '+won(mon):'입력 전',fin?'금융자산 수익 가정 연 '+pct(S.ay):'금융자산을 입력해요')]);
@@ -1849,8 +1851,8 @@ function bindAsset(el){
 SCR.a_re=function(el){syncAsset();var rm=reMode();
   el.innerHTML=ptitle('부동산','통으로 넣거나 세부로 나눠 입력해요.')+'<div class="seg2" style="grid-template-columns:1fr 1fr"><button type="button" data-m="total" aria-pressed="'+(rm==='total')+'">통으로 입력</button><button type="button" data-m="detail" aria-pressed="'+(rm==='detail')+'">세부로 나눠서</button></div><div class="rows">'+(rm==='total'?leafRow('re'):GRP.reD.map(leafRow).join(''))+'</div><p class="note">성장률은 해마다 오르는 비율(가격 상승률)이에요. 모르면 기본값 그대로 두세요. 거주 주택을 포함해서 입력하면 나이대 평균과 맞게 비교돼요.</p>';
   bindAsset(el);setCta(null,null)};
-SCR.a_st=function(el){syncAsset();el.innerHTML=ptitle('주식·펀드','종류별로 나눠 입력해요. 성장률은 원하면 바꿔요.')+'<div class="rows">'+GRP.st.map(leafRow).join('')+'</div><p class="note">한 종목은 한 곳에만 넣어요. 연금계좌 안의 주식·펀드는 연금계좌에 넣어요.</p>';bindAsset(el);setCta(null,null)};
-SCR.a_pn=function(el){syncAsset();el.innerHTML=ptitle('연금계좌','IRP, 연금저축펀드, 기타로 나눠 입력해요.')+'<div class="rows">'+GRP.pn.map(leafRow).join('')+'</div><p class="note">연금 수령 시기별 계산은 현금흐름의 개인연금 계산기에서 해요.</p>';bindAsset(el);setCta(null,null)};
+SCR.a_st=function(el){syncAsset();el.innerHTML=ptitle('주식·펀드','미국·한국 주식을 배당주, 성장주, 지수 ETF로 나눠 입력해요. 성장률은 원하면 바꿔요.')+[['미국 주식',GRP.stU],['한국 주식',GRP.stK]].map(function(g){var t=sumK(g[1]);return '<div class="grp"><h3>'+g[0]+(t?' · '+mf(t):'')+'</h3><div class="rows">'+g[1].map(leafRow).join('')+'</div></div>'}).join('')+'<p class="note">한 종목은 한 곳에만 넣어요. 연금계좌 안의 주식·펀드는 연금계좌에 넣어요.</p>';bindAsset(el);setCta(null,null)};
+SCR.a_pn=function(el){syncAsset();el.innerHTML=ptitle('연금계좌','DC형, IRP, 연금저축펀드, ISA로 나눠 입력해요. 계좌가 여러 개면 1, 2에 따로 넣어요.')+'<div class="rows">'+GRP.pn.map(leafRow).join('')+'</div><p class="note">연금 수령 시기별 계산은 현금흐름의 개인연금 계산기에서 해요.</p>';bindAsset(el);setCta(null,null)};
 SCR.a_ca=function(el){syncAsset();var debt=debtA();el.innerHTML=ptitle('예금·채권·기타')+'<div class="rows">'+GRP.ca.map(leafRow).join('')+'<button class="row'+(debt?'':' add')+'" type="button" data-a="debt"><span class="ic">채</span><span class="t"><b>부채 (선택)</b><span>대출 등. 순자산 비교에 써요</span></span><span class="v">'+(debt?'−'+mf(debt):'추가')+'</span></button></div>';bindAsset(el);setCta(null,null)};
 SCR.a_inc=function(el){syncAsset();var fin=finTotal(),mon=fin*S.ay/10/100/12;
   el.innerHTML=ptitle('자산이 만드는 월 소득')+(fin?'<button class="row" type="button" data-a="yield"><span class="ic">%</span><span class="t"><b>금융자산 수익 가정 연 '+pct(S.ay)+'</b><span>눌러서 바꿔요</span></span><span class="v">월 '+won(mon)+'</span></button><p class="note">금융자산 '+mf(fin)+' × 연 '+pct(S.ay)+' ÷ 12로 계산한 단순 값이에요. 수익률은 가정이고 보장되지 않아요.</p>':'<p class="note">자산 탭에서 금융자산을 입력하면 계산해요.</p>');
