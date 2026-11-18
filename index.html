@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta property="og:type" content="website"><meta property="og:title" content="Life Butler · 취향에 맞는 은퇴 설계"><meta property="og:description" content="현금흐름부터 즐거운 생활까지, 3분 무료 진단"><meta property="og:image" content="https://taeli74.github.io/retire/og.png"><meta property="og:url" content="https://taeli74.github.io/retire/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://taeli74.github.io/retire/og.png"><title>Life Butler</title>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><meta property="og:type" content="website"><meta property="og:title" content="Life Butler · 취향에 맞는 은퇴 설계"><meta property="og:description" content="현금흐름부터 즐거운 생활까지, 3분 무료 진단"><meta property="og:image" content="https://taeli74.github.io/retire.github.io/og.png"><meta property="og:url" content="https://taeli74.github.io/retire.github.io/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://taeli74.github.io/retire.github.io/og.png"><title>Life Butler</title>
 <meta name="description" content="원하는 노후 현금흐름을 만들고, 지금과의 Gap을 줄여가는 모바일 시범 서비스">
 <link rel="stylesheet" href="fonts.css"><style>html{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}</style></head><body><style>
 
@@ -473,6 +473,7 @@ a.lnk{display:inline-block;text-decoration:none}
 .ctab.sm{font-size:12px}.ctab.sm th small{font-weight:500;font-size:10.5px}.ctab.sm td,.ctab.sm th{padding:7px 2px}
 
 .hubv{margin-top:22px}.hubv .vgrid{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin:0 -2px;padding:2px}.hubv .vgrid>*{flex:0 0 72%;max-width:280px;scroll-snap-align:start}
+.typed{display:flex;align-items:center;gap:8px;margin:10px 0 2px}.typed label{font-size:13px;color:var(--mute);font-weight:700;flex:none}.typed input{flex:1;min-width:0;height:44px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit;font-size:17px;padding:0 12px;text-align:right}.typed span{font-size:13px;color:var(--mute)}
 </style>
 
 <div id="app">
@@ -1531,18 +1532,16 @@ $('#back').addEventListener('click',function(){backNav=true},true);
 /* ===== 자산 ===== */
 var LD={
  re:{t:'부동산 전체',g:'부',d:'집·토지 등 통으로 입력',r:30},rh:{t:'거주 주택',g:'집',d:'내가 사는 집',r:30},ri:{t:'투자용 주택·상가',g:'상',d:'월세·임대용',r:30},rl:{t:'토지',g:'토',d:'땅·임야',r:20},ro:{t:'기타 부동산',g:'기',d:'분양권·오피스텔 등',r:20},
- usd:{t:'배당주',g:'배',d:'미국 배당 중심 종목·배당 ETF',r:50},usg:{t:'성장주',g:'성',d:'미국 성장 중심 종목',r:80},usi:{t:'지수 ETF',g:'지',d:'S&P500·나스닥100 등',r:70},krd:{t:'배당주',g:'배',d:'국내 배당 중심 종목·배당 ETF',r:40},krg:{t:'성장주',g:'성',d:'국내 성장 중심 종목',r:60},kri:{t:'지수 ETF',g:'지',d:'코스피200·코스닥150 등',r:50},
- dc:{t:'DC형 퇴직연금',g:'DC',d:'회사가 넣어 주고 내가 운용하는 계좌',r:40},irp:{t:'IRP1',g:'I1',d:'개인형 퇴직연금 계좌',r:50},irp2:{t:'IRP2',g:'I2',d:'다른 금융사의 IRP 계좌',r:50},pf:{t:'연금저축펀드1',g:'연1',d:'연금저축 계좌',r:60},pf2:{t:'연금저축펀드2',g:'연2',d:'다른 금융사의 연금저축 계좌',r:60},isa:{t:'ISA',g:'ISA',d:'만기 때 연금계좌로 옮길 수 있어요',r:50},po:{t:'기타 연금',g:'기',d:'연금저축보험 등',r:30},
+ us:{t:'미국 주식',g:'美',d:'미국 개별 종목',r:70},kr:{t:'한국 주식',g:'韓',d:'국내 개별 종목',r:50},dv:{t:'배당주',g:'배',d:'배당 중심 종목(국내외)',r:45},gr:{t:'성장주',g:'성',d:'성장 중심 종목(국내외)',r:80},ix:{t:'지수·ETF·펀드',g:'지',d:'S&P500·코스피 등',r:60},
+ irp:{t:'IRP',g:'I',d:'개인형 퇴직연금',r:50},pf:{t:'연금저축펀드',g:'연',d:'연금저축 계좌',r:60},po:{t:'기타 연금',g:'기',d:'연금저축보험·퇴직연금 등',r:30},
  cash:{t:'예금·현금',g:'예',d:'예금·적금·CMA·파킹통장',r:25},bond:{t:'채권',g:'채',d:'국채·회사채·채권형',r:35},oth:{t:'그 밖의 자산',g:'기',d:'금·가상자산·회원권 등',r:20}
 };
-var GRP={re:['re'],reD:['rh','ri','rl','ro'],st:['usd','usg','usi','krd','krg','kri'],stU:['usd','usg','usi'],stK:['krd','krg','kri'],stD:['usd','krd'],pn:['dc','irp','irp2','pf','pf2','isa','po'],ca:['cash','bond','oth']};
+var GRP={re:['re'],reD:['rh','ri','rl','ro'],st:['us','kr','dv','gr','ix'],pn:['irp','pf','po'],ca:['cash','bond','oth']};
 var GDEF={pn:50,st:60,ca:25};
 function ad(){
   if(!S.ad){var a=S.asset||{},d={};
-    if(a.cash)d.cash={a:a.cash};if(a.bond)d.bond={a:a.bond};if(a.oth)d.oth={a:a.oth};if(a.re)d.re={a:a.re};if(a.stock)d.usi={a:a.stock};if(a.pen)d.po={a:a.pen};
+    if(a.cash)d.cash={a:a.cash};if(a.bond)d.bond={a:a.bond};if(a.oth)d.oth={a:a.oth};if(a.re)d.re={a:a.re};if(a.stock)d.ix={a:a.stock};if(a.pen)d.po={a:a.pen};
     S.ad=d}
-  var o=S.ad,mv={us:'usg',kr:'krg',dv:'krd',gr:'usg',ix:'usi'};
-  Object.keys(mv).forEach(function(k){if(o[k]){var t=mv[k];if(o[t])o[t].a=(o[t].a||0)+(o[k].a||0);else o[t]=o[k];delete o[k]}});
   return S.ad;
 }
 function leafA(k){var x=ad()[k];return x&&x.a||0}
@@ -1631,7 +1630,7 @@ function pensionAt(s,N){
 }
 function divAt(X){
   var age=curAge(),y=Math.max(0,X-age),R=simRun(Math.max(X,age+1)),row=R.rows[Math.min(y,R.rows.length-1)],inf=Math.pow(1+S.infl/1000,y),p=pcs();
-  var dvg=GRP.stD.reduce(function(t,k){return t+leafA(k)*Math.pow(1+leafR(k)/1000,y)},0),oth=Math.max(0,row.st-dvg),gross=(dvg*p.dy/1000+oth*p.dy2/1000)/12/inf;
+  var dvg=leafA('dv')*Math.pow(1+leafR('dv')/1000,y),oth=Math.max(0,row.st-dvg),gross=(dvg*p.dy/1000+oth*p.dy2/1000)/12/inf;
   return {bal:row.st/inf,gross:gross,net:gross*(1-0.154)};
 }
 function othAt(a){var s=0;Object.keys(S.inc||{}).forEach(function(k){if(k==='np')return;var x=S.inc[k];if(a>=x.s&&a<endOf(x))s+=x.amt});return s}
@@ -1690,7 +1689,7 @@ function bindPc(w){
     if(a.indexOf('npa:')===0){p.npa=+a.slice(4);save();again();return}
     if(a.indexOf('pa:')===0){p.pAge=+a.slice(3);save();again();return}
     var n=npNormal();
-    if(a==='np:amt'){var am=range(0,400,5,function(v){return v+'만원'});openSheet({title:'국민연금 예상 월 수령액',sub:'정상 수령('+n+'세)을 기준으로 한 월 금액이에요. 국민연금공단 "내 연금 알아보기"에서 확인할 수 있어요.',cols:[{items:am,idx:idxOf(am,npBase()),label:'월 수령액'}],ok:function(v){p.np=v[0];save();again()}})}
+    if(a==='np:amt'){var am=range(0,400,1,function(v){return v+'만원'});openSheet({title:'국민연금 예상 월 수령액',sub:'정상 수령('+n+'세)을 기준으로 한 월 금액이에요. 국민연금공단 "내 연금 알아보기"에서 확인할 수 있어요.',cols:[{items:am,idx:idxOf(am,npBase()),label:'월 수령액'}],ok:function(v){p.np=v[0];save();again()}})}
     else if(a==='np:age'){var ag=range(n-5,n+5,1,function(v){return v+'세'});openSheet({title:'국민연금 수령 시작 나이',sub:'정상 '+n+'세. 최대 5년 앞당기거나 늦출 수 있어요.',cols:[{items:ag,idx:idxOf(ag,npAge()),label:'나이'}],live:function(v){var b=npBase();return b?'월 <b>'+won(npAmt(v[0]))+'</b>'+(v[0]===n?' (정상)':(v[0]<n?' · 정상보다 −':' · 정상보다 +')+Math.abs(Math.round((npAmt(v[0])/b-1)*100))+'%'):'먼저 예상 월 수령액을 입력해요'},ok:function(v){p.npa=v[0];save();again()}})}
     else if(a==='p:age'){var pg=range(55,80,1,function(v){return v+'세'});openSheet({title:'개인연금 수령 시작 나이',sub:'연금계좌는 55세부터 연금으로 받을 수 있어요.',cols:[{items:pg,idx:idxOf(pg,p.pAge),label:'나이'}],ok:function(v){p.pAge=v[0];save();again()}})}
     else if(a==='p:n'){var pn=range(10,40,1,function(v){return v+'년'});openSheet({title:'개인연금 수령 기간',sub:'연금으로 인정받으려면 10년 이상으로 나눠 받아요.',cols:[{items:pn,idx:idxOf(pn,p.pN),label:'기간'}],ok:function(v){p.pN=v[0];save();again()}})}
@@ -1792,7 +1791,7 @@ SCR.f_age=function(el){
   var sel=ages.indexOf(S.fa)>=0?S.fa:(ages.indexOf(Reff())>=0?Reff():ages[0]);
   var chips=ages.map(function(a){var c=cmbAt(a);return '<button type="button" class="chip" data-fa="'+a+'" aria-pressed="'+(a===sel)+'"><i class="dot'+(c.tot<S.M?' bad':'')+'"></i>'+a+'세</button>'}).join('');
   var c=cmbAt(sel),d=c.tot-S.M,M=S.M;
-  var lines=[['s0','국민연금',c.np,npBase()?'시작 '+na+'세':'예상액 입력 전'],['s1','개인연금(세후)',c.pp,sumK(GRP.pn)?'시작 '+p.pAge+'세 · '+p.pN+'년':'연금계좌 입력 전'],['s2','배당(세후)',c.dv,sumK(GRP.st)?'주식 보유 기준':'주식 입력 전'],['s3','그 밖의 소득',c.ot,'진단에 입력한 소득']];
+  var lines=[['s0','국민연금',c.np,npBase()?'시작 '+na+'세':'예상액 입력 전'],['s1','개인연금(세후)',c.pp,sumK(GRP.pn)?'계좌별 개시 나이 기준':'연금계좌 입력 전'],['s2','배당(세후)',c.dv,sumK(GRP.st)?'주식 보유 기준':'주식 입력 전'],['s3','그 밖의 소득',c.ot,'진단에 입력한 소득']];
   el.innerHTML=ptitle('나이별 현금흐름','나이를 고르면 그때 받는 돈과 필요한 돈을 비교해요. 점이 주황이면 부족해요.')+'<div class="chips agc">'+chips+'</div>'+
    '<div class="card" style="margin-top:12px"><div class="bl" style="margin:0"><span>'+sel+'세에는 매달</span><em class="'+(d<0?'ovt':'okt')+'">'+(d<0?'부족 '+won(-d):'여유 '+won(d))+'</em></div><div class="big2">'+won(c.tot)+'</div><div class="small">필요 생활비 '+won(M)+' (오늘 돈 기준)</div>'+
    '<div class="sbar" style="margin-top:12px">'+lines.map(function(l){return '<i class="'+l[0]+'" style="flex:'+Math.max(0,l[2])+'"></i>'}).join('')+'<i style="flex:'+Math.max(0.0001,M-c.tot)+';background:var(--line)"></i></div>'+
@@ -1829,8 +1828,8 @@ SCR.asset=function(el){
   if(tot){var r=simRun();L=r.rows[r.rows.length-1]}
   el.innerHTML=ptitle('내 자산')+aHero()+(tot?AN:'')+
    cg([card('a_re','부동산',reSum()?mf(reSum()):'입력 전',reMode()==='detail'?'세부로 입력':'통으로 입력'),
-       card('a_st','주식·펀드',sumK(GRP.st)?mf(sumK(GRP.st)):'입력 전','미국·한국 · 배당·성장·지수'),
-       card('a_pn','연금계좌',sumK(GRP.pn)?mf(sumK(GRP.pn)):'입력 전','DC·IRP·연금저축·ISA'),
+       card('a_st','주식·펀드',sumK(GRP.st)?mf(sumK(GRP.st)):'입력 전','미국·한국·배당·성장·지수'),
+       card('a_pn','연금계좌',sumK(GRP.pn)?mf(sumK(GRP.pn)):'입력 전','IRP·연금저축·기타'),
        card('a_ca','예금·채권·기타',sumK(GRP.ca)?mf(sumK(GRP.ca)):'입력 전',debt?'부채 '+mf(debt):'부채도 입력할 수 있어요'),
        card('a_sim','자산 시뮬레이션',L?T+'세 '+mf(L.tot):'입력 후 계산',L?'오늘 돈으로 '+mf(L.real):'원하는 나이의 자산'),
        card('a_inc','자산이 만드는 월 소득',fin?'월 '+won(mon):'입력 전',fin?'금융자산 수익 가정 연 '+pct(S.ay):'금융자산을 입력해요')]);
@@ -1851,8 +1850,8 @@ function bindAsset(el){
 SCR.a_re=function(el){syncAsset();var rm=reMode();
   el.innerHTML=ptitle('부동산','통으로 넣거나 세부로 나눠 입력해요.')+'<div class="seg2" style="grid-template-columns:1fr 1fr"><button type="button" data-m="total" aria-pressed="'+(rm==='total')+'">통으로 입력</button><button type="button" data-m="detail" aria-pressed="'+(rm==='detail')+'">세부로 나눠서</button></div><div class="rows">'+(rm==='total'?leafRow('re'):GRP.reD.map(leafRow).join(''))+'</div><p class="note">성장률은 해마다 오르는 비율(가격 상승률)이에요. 모르면 기본값 그대로 두세요. 거주 주택을 포함해서 입력하면 나이대 평균과 맞게 비교돼요.</p>';
   bindAsset(el);setCta(null,null)};
-SCR.a_st=function(el){syncAsset();el.innerHTML=ptitle('주식·펀드','미국·한국 주식을 배당주, 성장주, 지수 ETF로 나눠 입력해요. 성장률은 원하면 바꿔요.')+[['미국 주식',GRP.stU],['한국 주식',GRP.stK]].map(function(g){var t=sumK(g[1]);return '<div class="grp"><h3>'+g[0]+(t?' · '+mf(t):'')+'</h3><div class="rows">'+g[1].map(leafRow).join('')+'</div></div>'}).join('')+'<p class="note">한 종목은 한 곳에만 넣어요. 연금계좌 안의 주식·펀드는 연금계좌에 넣어요.</p>';bindAsset(el);setCta(null,null)};
-SCR.a_pn=function(el){syncAsset();el.innerHTML=ptitle('연금계좌','DC형, IRP, 연금저축펀드, ISA로 나눠 입력해요. 계좌가 여러 개면 1, 2에 따로 넣어요.')+'<div class="rows">'+GRP.pn.map(leafRow).join('')+'</div><p class="note">연금 수령 시기별 계산은 현금흐름의 개인연금 계산기에서 해요.</p>';bindAsset(el);setCta(null,null)};
+SCR.a_st=function(el){syncAsset();el.innerHTML=ptitle('주식·펀드','종류별로 나눠 입력해요. 성장률은 원하면 바꿔요.')+'<div class="rows">'+GRP.st.map(leafRow).join('')+'</div><p class="note">한 종목은 한 곳에만 넣어요. 연금계좌 안의 주식·펀드는 연금계좌에 넣어요.</p>';bindAsset(el);setCta(null,null)};
+SCR.a_pn=function(el){syncAsset();el.innerHTML=ptitle('연금계좌','IRP, 연금저축펀드, 연금저축보험, 기타로 나눠 입력해요. 금액은 직접 입력해도 돼요.')+'<div class="rows">'+GRP.pn.map(leafRow).join('')+'</div><p class="note">계좌별 개시 나이와 월 연금 계산은 현금흐름의 개인연금 계산기에서 해요. 퇴직연금(DB·DC)은 IRP로 옮겼으면 IRP에, 아니면 기타에 넣어요.</p>';bindAsset(el);setCta(null,null)};
 SCR.a_ca=function(el){syncAsset();var debt=debtA();el.innerHTML=ptitle('예금·채권·기타')+'<div class="rows">'+GRP.ca.map(leafRow).join('')+'<button class="row'+(debt?'':' add')+'" type="button" data-a="debt"><span class="ic">채</span><span class="t"><b>부채 (선택)</b><span>대출 등. 순자산 비교에 써요</span></span><span class="v">'+(debt?'−'+mf(debt):'추가')+'</span></button></div>';bindAsset(el);setCta(null,null)};
 SCR.a_inc=function(el){syncAsset();var fin=finTotal(),mon=fin*S.ay/10/100/12;
   el.innerHTML=ptitle('자산이 만드는 월 소득')+(fin?'<button class="row" type="button" data-a="yield"><span class="ic">%</span><span class="t"><b>금융자산 수익 가정 연 '+pct(S.ay)+'</b><span>눌러서 바꿔요</span></span><span class="v">월 '+won(mon)+'</span></button><p class="note">금융자산 '+mf(fin)+' × 연 '+pct(S.ay)+' ÷ 12로 계산한 단순 값이에요. 수익률은 가정이고 보장되지 않아요.</p>':'<p class="note">자산 탭에서 금융자산을 입력하면 계산해요.</p>');
@@ -1914,9 +1913,10 @@ SCR.h_feed=function(el){
   setCta(null,null);
 };
 
+var NPNOM=false;
 /* ===== v9: 받은 돈 사용 비교 (생활비 vs S&P500 투자, 낙관·보통·비관) ===== */
 function ivs(){var p=pcs();if(!p.iv)p.iv={r:[30,70,100],fx:0,Hn:null,Hp:85,Hd:85};return p.iv}
-function ivReal(r){var v=ivs();return (1+r/1000)*(1+v.fx/1000)/(1+S.infl/1000)-1}
+function ivReal(r){var v=ivs();if(NPNOM)return (1+r/1000)*(1+v.fx/1000)-1;return (1+r/1000)*(1+v.fx/1000)/(1+S.infl/1000)-1}
 function ek(v){v=Math.max(0,v);return v>=10000?(v/10000).toFixed(1)+'억':Math.round(v).toLocaleString('ko-KR')+'만'}
 /* pay(age) 월 수령액(오늘 돈), a0 시작 나이, H 비교 나이 → {spent:누적, inv:[3개 수익률 자산]} */
 function ivRun(pay,a0,H){
@@ -1930,7 +1930,7 @@ function ivHead(H,key){
          pcRow('iv:fx','환율 변동 가정','원/달러 연 변동. 0이면 변동 없음',(v.fx>0?'+':'')+pct(v.fx))+
          pcRow('iv:H:'+key,'비교 나이','이 나이까지의 누적 금액을 비교해요',H+'세');
 }
-function ivNote(){return '<p class="note">받은 돈 <b>전부</b>를 매달 S&amp;P500(달러 기준)에 넣는다고 가정해요. 수익률은 가정일 뿐 보장되지 않고, 원금 손실이 날 수 있어요. 달러 수익률에 환율 변동과 물가상승률('+pct(S.infl)+')을 반영한 오늘 돈 기준이고, 세금·수수료는 반영하지 않은 <b>세전</b> 값이에요. 특정 상품을 권하는 것이 아니라 비교용 시나리오예요.</p>'}
+function ivNote(){return '<p class="note">받은 돈 <b>전부</b>를 매달 S&amp;P500(달러 기준)에 넣는다고 가정해요. 수익률은 가정일 뿐 보장되지 않고, 원금 손실이 날 수 있어요. '+(NPNOM?'달러 수익률에 환율 변동을 반영한 미래가치(명목) 기준이고, 국민연금은 매년 정한 인상률만큼 오른다고 가정했어요. 물가로 나누지 않아서 숫자가 커 보여도 구매력은 그만큼 늘지 않아요. ':'달러 수익률에 환율 변동과 물가상승률('+pct(S.infl)+')을 반영한 오늘 돈 기준이고, ')+'세금·수수료는 반영하지 않은 <b>세전</b> 값이에요. 특정 상품을 권하는 것이 아니라 비교용 시나리오예요.</p>'}
 function ivTable(rows,H){
   return '<table class="ctab sm"><thead><tr><th>시작</th><th>월 수령</th><th>쓰면<br><small>누적</small></th><th>투자<br><small>비관</small></th><th>투자<br><small>보통</small></th><th>투자<br><small>낙관</small></th></tr></thead><tbody>'+rows.map(function(r){return '<tr class="'+(r.sel?'sel':'')+'"><td>'+r.a+'세</td><td>'+ek(r.m)+'</td><td>'+ek(r.run.spent)+'</td><td>'+ek(r.run.inv[0])+'</td><td>'+ek(r.run.inv[1])+'</td><td>'+ek(r.run.inv[2])+'</td></tr>'}).join('')+'</tbody></table>';
 }
@@ -1941,30 +1941,31 @@ function ivPaint(){
   var p=pcs(),v=ivs(),n=npNormal(),base=npBase(),na=npAge(),age=curAge(),pbal=sumK(GRP.pn),stbal=sumK(GRP.st);
   /* 국민연금: a세부터 받아 정상 나이(n)까지는 전부 투자, n세부터는 생활비로 쓰는 경우 vs 정상 수령(생활비) */
   if(base){
+    var q=pcs(),nom=q.npNom!==false,ng=q.npg!=null?q.npg:20;NPNOM=nom;
     var H1=Math.max(v.Hn||85,n),lab=['비관','보통','낙관'];
+    var F=function(a){return nom?Math.pow(1+ng/1000,Math.max(0,Math.floor(a)-age)):1};
     var mi=ivs().r.map(function(r){return Math.pow(1+ivReal(r),1/12)-1});
-    /* 월 단위로 누적. 반환: {pot,spent2,cum[k],series[k][year]} */
     function npPath(a,k,H){
-      var m=npAmt(a),pot=0,spent=0,ser=[];
-      for(var t=0;t<Math.round((H-a)*12);t++){var age=a+t/12,x=age>=a?m:0;
-        if(age<n){pot=pot*(1+mi[k])+x}else{pot=pot*(1+mi[k]);spent+=x}}
+      var m=npAmt(a),pot=0,spent=0;
+      for(var t=0;t<Math.round((H-a)*12);t++){var ag=a+t/12,x=m*F(ag);
+        if(ag<n){pot=pot*(1+mi[k])+x}else{pot=pot*(1+mi[k]);spent+=x}}
       return {pot:pot,spent:spent,cum:pot+spent};
     }
-    function npCumAt(a,k,Y){/* 나이 Y까지 누적 */return a>=Y?{pot:0,spent:0,cum:0}:npPath(a,k,Y)}
-    var nm=npAmt(n),norm=function(Y){return Math.max(0,Y-n)*12*nm};
-    var rows=[];for(var a=n-5;a<=Math.min(n+5,Math.max(H1,na));a++){(function(a){var m=npAmt(a),r={a:a,m:m,sel:a===na,c:[0,1,2].map(function(k){return a<n?npCumAt(a,k,H1).cum:Math.max(0,H1-a)*12*m})};rows.push(r)})(a)}
+    function lump(a,Y){var m=npAmt(a),c=0;for(var t=0;t<Math.round((Y-a)*12);t++)c+=m*F(a+t/12);return c}
+    var nm=npAmt(n),N=lump(n,H1);
+    var rows=[];for(var a=n-5;a<=Math.min(n+5,Math.max(H1,na));a++){(function(a){var m=npAmt(a);rows.push({a:a,m:m*F(a),sel:a===na,c:[0,1,2].map(function(k){return a<n?npPath(a,k,H1).cum:lump(a,H1)})})})(a)}
     var tb='<table class="ctab sm"><thead><tr><th>시작</th><th>월 수령</th><th>누적<br><small>비관</small></th><th>누적<br><small>보통</small></th><th>누적<br><small>낙관</small></th></tr></thead><tbody>'+rows.map(function(r){return '<tr class="'+(r.sel?'sel':'')+'"><td>'+r.a+'세</td><td>'+ek(r.m)+'</td><td>'+ek(r.c[0])+'</td><td>'+ek(r.c[1])+'</td><td>'+ek(r.c[2])+'</td></tr>'}).join('')+'</tbody></table>';
     var sum;
     if(na<n){
-      var e=[0,1,2].map(function(k){return npPath(na,k,H1)}),N=norm(H1),lines='';
-      lines=[0,1,2].map(function(k){var d=e[k].cum-N;
-        /* 역전 나이: n 이후 early 누적이 정상 누적보다 작아지는 첫 해 */
-        var cross=null;for(var Y=Math.ceil(n);Y<=100;Y++){if(npPath(na,k,Y).cum<norm(Y)){cross=Y;break}}
-        return '<div class="alr"><span class="ic s'+k+'" style="width:12px;height:12px;border-radius:4px"></span><div class="t"><b>'+lab[k]+' ('+pct(v.r[k])+')</b><small>'+n+'세에 투자금 '+ek(e[k].pot)+' · '+(cross&&cross<=H1?cross+'세에 정상 수령이 역전':(cross?cross+'세에 정상 수령이 역전':'100세까지 앞서요'))+'</small></div><div style="text-align:right"><b>'+ek(e[k].cum)+'</b><br><small style="color:'+(d>=0?'var(--ok)':'var(--gap)')+';font-weight:800">정상보다 '+(d>=0?'+':'−')+ek(Math.abs(d))+'</small></div></div>'}).join('');
-      sum='<div class="bl" style="margin:12px 0 0"><span>'+na+'세 조기 수령 → '+n+'세까지 투자 → '+n+'세부터 생활비</span></div><div class="small">'+H1+'세까지 누적 (정상 수령 '+n+'세부터 월 '+ek(nm)+' 생활비로 쓰면 <b>'+ek(N)+'</b>)</div><div class="rows" style="margin-top:8px">'+lines+'</div><p class="note" style="color:var(--ink)"><b>읽는 법</b> — '+na+'세부터 '+n+'세까지 받은 돈 전부를 S&amp;P500에 넣어 두고, '+n+'세부터는 감액된 월 '+ek(npAmt(na))+'을 생활비로 써요. 투자해 둔 돈은 그대로 불어난다고 보고, 생활비로 쓴 누적액과 합쳐서 정상 수령과 비교한 값이에요. "역전"은 정상 수령의 누적이 이 합계를 넘어서는 나이예요.</p>';
+      var e=[0,1,2].map(function(k){return npPath(na,k,H1)}),lines;
+      lines=[0,1,2].map(function(k){var d=e[k].cum-N,cross=null;for(var Y=Math.ceil(n);Y<=100;Y++){if(npPath(na,k,Y).cum<lump(n,Y)){cross=Y;break}}
+        return '<div class="alr"><span class="ic s'+k+'" style="width:12px;height:12px;border-radius:4px"></span><div class="t"><b>'+lab[k]+' ('+pct(v.r[k])+')</b><small>'+n+'세에 투자금 '+ek(e[k].pot)+' · '+(cross?cross+'세에 정상 수령이 역전':'100세까지 앞서요')+'</small></div><div style="text-align:right"><b>'+ek(e[k].cum)+'</b><br><small style="color:'+(d>=0?'var(--ok)':'var(--gap)')+';font-weight:800">정상보다 '+(d>=0?'+':'−')+ek(Math.abs(d))+'</small></div></div>'}).join('');
+      sum='<div class="bl" style="margin:12px 0 0"><span>'+na+'세 조기 수령 → '+n+'세까지 투자 → '+n+'세부터 생활비</span></div><div class="small">'+H1+'세까지 누적 (정상 수령 '+n+'세부터 월 '+ek(nm*F(n))+' 생활비로 쓰면 <b>'+ek(N)+'</b>)</div><div class="rows" style="margin-top:8px">'+lines+'</div><p class="note" style="color:var(--ink)"><b>읽는 법</b> — '+na+'세부터 '+n+'세까지 받은 돈 전부를 S&amp;P500에 넣어 두고, '+n+'세부터는 감액된 연금(시작 월 '+ek(npAmt(na)*F(n))+')을 생활비로 써요. 투자해 둔 돈은 그대로 불어난다고 보고, 생활비로 쓴 누적액과 합쳐서 정상 수령과 비교한 값이에요. "역전"은 정상 수령의 누적이 이 합계를 넘어서는 나이예요.</p>';
     }else sum='<p class="note">위 "수령 시작 나이"를 정상 '+n+'세보다 앞당기면, 앞당겨 받은 돈을 '+n+'세까지 투자해서 정상 수령과 누적으로 비교해 줘요.</p>';
-    var head='<div class="card" style="margin-top:12px"><div class="bl" style="margin:0"><span><b>조기 수령 후 투자 vs 정상 수령</b></span></div><div class="small" style="margin-bottom:6px">'+n+'세 이후 받는 연금은 모두 생활비로 쓰고, '+H1+'세까지 누적으로 비교해요.</div><div class="rows">'+ivHead(H1,'n')+'</div>'+sum+tb+ivNote()+'</div>';
-    pcE('pcN').insertAdjacentHTML('beforeend',head);
+    var st='<table class="ctab sm"><thead><tr><th>시작</th><th>오늘 돈</th><th>미래가치<br><small>연 '+pct(ng)+'</small></th></tr></thead><tbody>'+[n-5,n-3,n,n+3,n+5].map(function(a){var m=npAmt(a);return '<tr class="'+(a===na?'sel':'')+'"><td>'+a+'세</td><td>'+ek(m)+'</td><td>'+ek(m*Math.pow(1+ng/1000,Math.max(0,a-age)))+'</td></tr>'}).join('')+'</tbody></table>';
+    var rowsH=pcRow('iv:nm','금액 기준','오늘 돈은 물가를 뺀 값, 미래가치는 매년 인상을 반영한 값',nom?'미래가치':'오늘 돈')+pcRow('iv:ng','국민연금 연 인상률','매년 물가·소득 반영 가정(기본 2%)',pct(ng));
+    var head='<div class="card" style="margin-top:12px"><div class="bl" style="margin:0"><span><b>조기 수령 후 투자 vs 정상 수령</b></span></div><div class="small" style="margin-bottom:6px">'+n+'세 이후 받는 연금은 모두 생활비로 쓰고, '+H1+'세까지 누적으로 비교해요.'+(nom?' 금액은 미래가치(명목)예요.':' 금액은 오늘 돈 기준이에요.')+'</div><div class="rows">'+rowsH+ivHead(H1,'n')+'</div>'+sum+tb+'<div class="small" style="margin-top:12px"><b>시작 시점의 월 연금</b></div>'+st+ivNote()+'</div>';
+    pcE('pcN').insertAdjacentHTML('beforeend',head);NPNOM=false;
   }
   /* 개인연금 */
   if(pbal){
@@ -1987,7 +1988,9 @@ bindPc=function(w){
   _bindPc9(w);
   w.addEventListener('click',function(e){
     var b=e.target.closest('[data-pc^="iv:"]');if(!b)return;var a=b.dataset.pc,v=ivs(),again=function(){save();pcPaint()};
-    if(a==='iv:r'){var its=range(0,200,5,pct);openSheet({title:'S&P500 연 수익률 가정(달러)',sub:'비관·보통·낙관 세 가지를 골라요. 보장되는 값이 아니에요.',cols:[{items:its,idx:idxOf(its,v.r[0]),label:'비관'},{items:its,idx:idxOf(its,v.r[1]),label:'보통'},{items:its,idx:idxOf(its,v.r[2]),label:'낙관'}],ok:function(x){var s=x.slice().sort(function(p,q){return p-q});v.r=s;again()}})}
+    if(a==='iv:nm'){var q=pcs();q.npNom=q.npNom===false;again()}
+    else if(a==='iv:ng'){var q2=pcs(),ngs=range(0,60,5,pct);openSheet({title:'국민연금 연 인상률',sub:'수령 전·후 매년 연금액이 오르는 비율로 가정해요. 기본 2%.',cols:[{items:ngs,idx:idxOf(ngs,q2.npg!=null?q2.npg:20),label:'연 인상률'}],ok:function(x){q2.npg=x[0];again()}})}
+    else if(a==='iv:r'){var its=range(0,200,5,pct);openSheet({title:'S&P500 연 수익률 가정(달러)',sub:'비관·보통·낙관 세 가지를 골라요. 보장되는 값이 아니에요.',cols:[{items:its,idx:idxOf(its,v.r[0]),label:'비관'},{items:its,idx:idxOf(its,v.r[1]),label:'보통'},{items:its,idx:idxOf(its,v.r[2]),label:'낙관'}],ok:function(x){var s=x.slice().sort(function(p,q){return p-q});v.r=s;again()}})}
     else if(a==='iv:fx'){var fx=range(-50,50,5,function(z){return (z>0?'+':'')+pct(z)});openSheet({title:'환율 변동 가정',sub:'원/달러가 해마다 오르면 +, 내리면 −. 0이면 변동 없음.',cols:[{items:fx,idx:idxOf(fx,v.fx),label:'연 변동'}],ok:function(x){v.fx=x[0];again()}})}
     else if(a.indexOf('iv:H:')===0){var k=a.slice(5),lo=k==='n'?npNormal():70,hi=100,ag=range(lo,hi,1,function(z){return z+'세'}),cur=k==="n"?(v.Hn||85):(k==='p'?v.Hp:v.Hd);
       openSheet({title:'비교 나이',sub:k==='n'?'정상 수령 나이로 두면 "정상 수령을 시작할 때" 얼마나 차이 나는지 볼 수 있어요.':'이 나이 시점의 자산을 비교해요.',cols:[{items:ag,idx:idxOf(ag,cur),label:'나이'}],ok:function(x){if(k==='n')v.Hn=x[0];else if(k==='p')v.Hp=x[0];else v.Hd=x[0];again()}})}
@@ -2088,6 +2091,108 @@ bindPc=function(w){
     else if(a==='pp:w'){var it5=range(0,500,5,function(v){return v+'만원'});openSheet({title:'받고 싶은 월 금액(세후)',sub:p.pAge+'세부터 매달 받고 싶은 금액이에요. 오늘 돈 기준.',cols:[{items:it5,idx:idxOf(it5,p.ppw||0),label:'월'}],ok:function(v){p.ppw=v[0];again()}})}
     else if(a==='dv:a'){var it6=range(0,20000,50,function(v){return mf(v)});openSheet({title:'연 배당금(세전)',sub:'1년 동안 받는 배당금을 모두 합친 금액이에요.',cols:[{items:it6,idx:idxOf(it6,p.dvA||0),label:'연 배당금'}],live:function(v){return v[0]?'월 약 <b>'+won(v[0]/12)+'</b> (세전)':'0이면 자산 값을 써요'},ok:function(v){p.dvA=v[0]||null;again()}})}
     else if(a==='dv:g'){var it7=range(0,100,5,pct);openSheet({title:'배당 연 증가율',sub:'해마다 배당금이 늘어난다고 가정하는 비율이에요.',cols:[{items:it7,idx:idxOf(it7,dvIn().g),label:'연 증가율'}],ok:function(v){p.dvg=v[0];again()}})}
+  });
+};
+
+/* ===== v11: 개인연금 계좌별(IRP·연금저축펀드·연금저축보험·기타) 개시 시점·현금흐름, 본인입력+금액선택 ===== */
+LD.irp.d='개인형 퇴직연금·퇴직금 이전분';LD.pf.d='연금저축펀드 계좌';
+LD.pi={t:'연금저축보험',g:'보',d:'연금저축보험(공시이율형 등)',r:30};
+LD.po.t='기타 연금';LD.po.d='퇴직연금(DC) 등 그 밖의 연금';LD.po.r=30;
+GRP.pn=['irp','pf','pi','po'];
+var ACCK=['irp','pf','pi','po'],accOpen={};
+/* --- 금액 직접 입력 + 휠 선택 --- */
+var PT=null,_os11=openSheet;
+openSheet=function(o){
+  var t=PT;PT=null;_os11(o);if(!t)return;
+  var sh=document.getElementById('sheet'),shb=sh.querySelector('.shb');if(!shb)return;
+  var d=document.createElement('div');d.className='typed';d.innerHTML='<label for="shty">'+t.label+'</label><input id="shty" type="text" inputmode="numeric" autocomplete="off" placeholder="직접 입력"><span>'+t.unit+'</span>';
+  sh.insertBefore(d,shb);
+  var ok=document.getElementById('shok'),orig=ok.onclick,inp=d.querySelector('input');
+  inp.addEventListener('input',function(){inp.value=inp.value.replace(/[^0-9]/g,'').slice(0,9);var L=document.getElementById('shl');if(inp.value!==''&&L)L.innerHTML=t.live?t.live(+inp.value):''});
+  ok.onclick=function(){if(inp.value!==''){closeSheet();t.ok(+inp.value)}else orig()};
+};
+var _editLeaf11=editLeaf;
+editLeaf=function(k,done){
+  PT={label:'금액 직접 입력',unit:'만원',live:function(n){return '<b>'+mf(n)+'</b>'},ok:function(n){var cu=ad()[k];if(n){var o={a:n};if(cu&&cu.r!=null)o.r=cu.r;ad()[k]=o}else delete ad()[k];syncAsset();save();done()}};
+  _editLeaf11(k,done);
+};
+var _editDebt11=editDebt;
+editDebt=function(done){PT={label:'금액 직접 입력',unit:'만원',live:function(n){return '<b>'+mf(n)+'</b>'},ok:function(n){if(n)ad().debt={a:n};else delete ad().debt;save();done()}};_editDebt11(done)};
+/* --- 계좌별 계산 --- */
+function accs(){var p=pcs();p.acc=p.acc||{};return p.acc}
+function accCfg(k,ovr){
+  var a=accs()[k]||{},p=pcs(),A=leafA(k),tot=sumK(GRP.pn),pen=sim().pen||0,sh=pen*(tot?A/tot:(k==='irp'?1:0));
+  return {bal:ovr&&a.b!=null?a.b:A,c:a.c!=null?a.c:sh,stop:a.stop||Reff(),r:a.r!=null?a.r:leafR(k),s:a.s||p.pAge,N:a.N||p.pN};
+}
+function accBal(c,s){
+  var age=curAge(),y=Math.max(0,s-age),inf=S.infl/1000,i=Math.pow(1+c.r/1000,1/12)-1,B=c.bal*Math.pow(1+c.r/1000,y),x=0;
+  for(var m=0;m<Math.round(y*12);m++){var on=(age+m/12)<Math.min(c.stop,s);x=x*(1+i)+(on?c.c:0)}
+  return (B+x)/Math.pow(1+inf,y);
+}
+function accPen(k,ovr,s0,N0){
+  var c=accCfg(k,ovr),s=Math.max(s0||c.s,curAge()),N=N0||c.N,p=pcs(),bal=accBal(c,s),rr=(1+p.pr/1000)/(1+S.infl/1000)-1,i=Math.pow(1+rr,1/12)-1,n=12*N,
+  g=bal>0?(i?bal*i/(1-Math.pow(1+i,-n)):bal/n):0,tx=0;for(var t=0;t<N;t++)tx+=ageTax(s+t);tx/=N;
+  return {s:s,N:N,bal:bal,gross:g,net:g*(1-tx),i:i,n:n};
+}
+function accNet(k,a,ovr,s0){var e=accPen(k,ovr,s0);return a>=e.s&&a<e.s+e.N?e.net:0}
+function accRemain(k,X,ovr,s0){
+  var e=accPen(k,ovr,s0),c=accCfg(k,ovr);
+  if(X<e.s)return accBal(c,X);if(X>=e.s+e.N)return 0;
+  var m=Math.round((X-e.s)*12),f=Math.pow(1+e.i,m);return Math.max(0,e.i?e.bal*f-e.gross*(f-1)/e.i:e.bal-e.gross*m);
+}
+function accPaid(k,ovr,X){var c=accCfg(k,ovr),age=curAge(),mo=Math.max(0,Math.round((Math.min(c.stop,X)-age)*12));return c.bal+c.c*mo}
+function accSum(f,ovr,a,s0){return ACCK.reduce(function(t,k){return t+f(k,a,ovr,s0)},0)}
+/* 현금흐름 탭도 계좌별 개시 나이를 따름 */
+cmbAt=function(a){
+  var p=pcs(),np=npBase()&&a>=npAge()?npAmt(npAge()):0,pp=sumK(GRP.pn)?accSum(accNet,false,a):0,dv=sumK(GRP.st)?divAt(a).net:0,ot=othAt(a);
+  return {np:np,pp:pp,dv:dv,ot:ot,tot:np+pp+dv+ot};
+};
+function accSummary(k){var c=accCfg(k,true),e=accPen(k,true);return {c:c,e:e}}
+ppPaintAll=function(){
+  var p=pcs(),age=curAge(),want=p.ppw||0,any=ACCK.some(function(k){var c=accCfg(k,true);return c.bal>0||c.c>0});
+  var h='<p class="note" style="margin:0 0 8px">계좌마다 적립금·납입·개시 나이를 따로 정해요. 적립금을 비워 두면 자산 탭 값을 써요. 개시 나이와 기간은 현금흐름 탭에도 그대로 반영돼요.</p>';
+  ACCK.forEach(function(k){
+    var s=accSummary(k),c=s.c,e=s.e,o=!!accOpen[k],A=accs()[k]||{},has=c.bal>0||c.c>0;
+    h+='<div class="card acc" style="padding:6px 8px;margin-top:8px"><div class="rows">'+pcRow('ac:'+k+':open',LD[k].t,has?mf(c.bal)+(c.c?' · 월 '+won(c.c)+' 납입':'')+' · '+e.s+'세부터 '+e.N+'년':LD[k].d,has?'월 '+won(e.net):'입력')+'</div>';
+    if(o)h+='<div class="rows" style="margin-top:6px">'+
+      pcRow('ac:'+k+':b','지금 적립금',A.b!=null?'직접 입력한 값':'자산 탭 값 · 눌러서 바꿔요',mf(c.bal))+
+      pcRow('ac:'+k+':c','매월 납입액',A.c!=null?'직접 입력한 값':'없음 · 눌러서 정해요',c.c?won(c.c):'없음')+
+      pcRow('ac:'+k+':stop','납입 종료 나이','이 나이까지 넣어요',c.stop+'세')+
+      pcRow('ac:'+k+':r','적립 중 연 수익률','쌓는 동안의 가정',pct(c.r))+
+      pcRow('ac:'+k+':s','연금 개시 나이','55세부터 받을 수 있어요',e.s+'세')+
+      pcRow('ac:'+k+':N','수령 기간','10년 이상으로 나눠 받아요',e.N+'년')+'</div><p class="note" style="margin:6px 4px 4px">'+e.s+'세 시작 적립금 '+mf(e.bal)+' · 넣은 원금 '+mf(accPaid(k,true,e.s))+' · 세전 월 '+won(e.gross)+' → 세후 월 '+won(e.net)+'</p>';
+    h+='</div>';
+  });
+  h+='<div class="rows" style="margin-top:8px">'+pcRow('p:r','수령 중 운용 수익률','받는 동안 남은 돈의 연 수익 가정',pct(p.pr))+pcRow('pp:w','받고 싶은 월 금액(세후)','목표와 비교해서 보여줘요',want?won(want):'정하기')+'</div>';
+  if(any){
+    var set={55:1,60:1,65:1,70:1,75:1,80:1,85:1};ACCK.forEach(function(k){var c=accCfg(k,true);if(c.bal>0||c.c>0)set[c.s]=1});
+    var ages=Object.keys(set).map(Number).filter(function(a){return a>=age}).sort(function(a,b){return a-b});
+    var names=['IRP','펀드','보험','기타'];
+    h+='<div class="card" style="margin-top:12px"><div class="bl" style="margin:0"><span><b>나이별 월 연금(세후)</b></span></div><table class="ctab sm"><thead><tr><th>나이</th>'+names.map(function(n){return '<th>'+n+'</th>'}).join('')+'<th>합계</th>'+(want?'<th>목표 대비</th>':'')+'</tr></thead><tbody>'+
+      ages.map(function(a){var v=ACCK.map(function(k){return accNet(k,a,true)}),t=v.reduce(function(x,y){return x+y},0);return '<tr><td>'+a+'세</td>'+v.map(function(x){return '<td>'+(x?ek(x):'−')+'</td>'}).join('')+'<td><b>'+ek(t)+'</b></td>'+(want?'<td style="color:'+(t>=want?'var(--ok)':'var(--gap)')+';font-weight:800">'+(t>=want?'+':'−')+ek(Math.abs(t-want))+'</td>':'')+'</tr>'}).join('')+'</tbody></table>'+
+      '<div class="bl" style="margin:14px 0 0"><span><b>남은 적립금</b></span></div><table class="ctab sm"><thead><tr><th>나이</th><th>남은 적립금</th><th>넣은 원금</th></tr></thead><tbody>'+
+      ages.map(function(a){var r=ACCK.reduce(function(t,k){return t+accRemain(k,a,true)},0),pd=ACCK.reduce(function(t,k){return t+accPaid(k,true,a)},0);return '<tr><td>'+a+'세</td><td><b>'+ek(r)+'</b></td><td>'+ek(pd)+'</td></tr>'}).join('')+'</tbody></table>'+
+      '<p class="note">적립금은 오늘 돈 기준이고, 개시 전에는 쌓이는 금액, 개시 후에는 받고 남은 금액이에요.'+(want?' 목표 대비 +는 목표보다 많이, −는 부족하다는 뜻이에요.':'')+'</p></div>';
+    /* 모든 계좌를 같은 나이에 시작할 때 비교 */
+    var Hp=ivs().Hp||85,list=[55,57,60,63,65,70].filter(function(a){return a>=age}),
+    rp=list.map(function(a){var m=accSum(accNet,true,a,a);return {a:a,m:m,sel:false,run:ivRun(function(x){return accSum(accNet,true,x,a)},a,Math.max(Hp,a))}});
+    h+=ivBlock('받은 연금, 생활비 vs 투자 비교 (모든 계좌를 같은 나이에 시작할 때)',rp,Hp,'p','');
+  }else h+='<p class="note">계좌의 적립금이나 월 납입액을 넣으면 계산해요.</p>';
+  h+='<p class="note">오늘 돈 기준이에요. 연금수령 요건(55세 이후, 10년 이상 분할)을 지키면 연금소득세 55~69세 5.5%, 70~79세 4.4%, 80세 이상 3.3%가 일반적으로 적용돼요(IRP·연금저축 기준). 수령 한도를 넘거나 연 수령액이 일정 기준(연 1,500만원 안팎)을 넘으면 세금이 달라질 수 있어요. 연금저축보험은 종신형 등 상품 조건에 따라 받는 방식이 달라질 수 있어요. 세법은 바뀔 수 있으니 세무 전문가에게 확인하세요.</p>';
+  pcE('pcP').innerHTML=h;
+};
+var _bindPc11=bindPc;
+bindPc=function(w){
+  _bindPc11(w);
+  w.addEventListener('click',function(e){
+    var b=e.target.closest('[data-pc^="ac:"]');if(!b)return;var m=b.dataset.pc.split(':'),k=m[1],f=m[2],A=accs()[k]=accs()[k]||{},c=accCfg(k,true),age=curAge(),again=function(){save();pcPaint()};
+    if(f==='open'){accOpen[k]=!accOpen[k];pcPaint();return}
+    if(f==='b'){PT={label:'금액 직접 입력',unit:'만원',live:function(n){return '<b>'+mf(n)+'</b>'},ok:function(n){A.b=n;again()}};var it=range(0,60000,100,mf);openSheet({title:LD[k].t+' 적립금',sub:'지금까지 모은 금액이에요. 대략이면 충분해요.',cols:[{items:it,idx:idxOf(it,c.bal),label:'적립금'}],ok:function(v){A.b=v[0];again()}})}
+    else if(f==='c'){PT={label:'금액 직접 입력',unit:'만원',live:function(n){return '1년에 <b>'+won(n*12)+'</b>'},ok:function(n){A.c=n;again()}};var it2=range(0,500,5,function(v){return v+'만원'});openSheet({title:LD[k].t+' 매월 납입액',sub:'앞으로 매달 넣는 금액이에요.',cols:[{items:it2,idx:idxOf(it2,c.c),label:'월'}],live:function(v){return v[0]?'1년에 <b>'+won(v[0]*12)+'</b>':'0이면 더 넣지 않아요'},ok:function(v){A.c=v[0];again()}})}
+    else if(f==='stop'){var it3=range(age,80,1,function(v){return v+'세'});openSheet({title:'납입 종료 나이',sub:'이 나이까지 납입하고 그 뒤로는 불리기만 한다고 가정해요.',cols:[{items:it3,idx:idxOf(it3,c.stop),label:'나이'}],ok:function(v){A.stop=v[0];again()}})}
+    else if(f==='r'){var it4=range(0,150,5,pct);openSheet({title:LD[k].t+' 적립 중 수익률',sub:'모으는 동안의 가정이에요. 보장되지 않아요.',cols:[{items:it4,idx:idxOf(it4,c.r),label:'연 수익률'}],ok:function(v){A.r=v[0];again()}})}
+    else if(f==='s'){var it5=range(55,80,1,function(v){return v+'세'});openSheet({title:LD[k].t+' 연금 개시 나이',sub:'55세부터 연금으로 받을 수 있어요.',cols:[{items:it5,idx:idxOf(it5,c.s),label:'나이'}],ok:function(v){A.s=v[0];again()}})}
+    else if(f==='N'){var it6=range(10,40,1,function(v){return v+'년'});openSheet({title:LD[k].t+' 수령 기간',sub:'연금으로 인정받으려면 10년 이상으로 나눠 받아요.',cols:[{items:it6,idx:idxOf(it6,c.N),label:'기간'}],ok:function(v){A.N=v[0];again()}})}
   });
 };
 
